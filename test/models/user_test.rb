@@ -26,4 +26,10 @@ class UserTest < ActiveSupport::TestCase
     user2 = build(:user, name: user1.name)
     assert user2.invalid?
   end
+  test 'user factory is a beginnger' do
+    assert build(:user).beginner?
+  end
+  test 'admin factory is an admin' do
+    assert build(:admin).admin?
+  end
 end

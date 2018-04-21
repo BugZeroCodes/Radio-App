@@ -4,5 +4,9 @@ FactoryBot.define do
     password 'example'
     dj_name 'Beldib'
     name 'Jiff'
+
+    factory :admin do
+      role 'admin'
+    end
   end
 end
