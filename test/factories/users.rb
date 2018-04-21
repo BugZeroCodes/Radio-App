@@ -8,5 +8,8 @@ FactoryBot.define do
     factory :admin do
       role 'admin'
     end
+    factory :beginner do
+      role 'beginner'
+    end
   end
 end

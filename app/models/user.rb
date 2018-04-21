@@ -7,4 +7,11 @@ class User < ApplicationRecord
 
   validates :dj_name, :name, presence: true, uniqueness: true
   validates :role, presence: true
+
+  def admin?
+    self.role == 'admin'
+  end
+  def beginner?
+    self.role == 'beginner'
+  end
 end
