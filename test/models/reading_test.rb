@@ -10,4 +10,7 @@ class ReadingTest < ActiveSupport::TestCase
   test 'belongs to announcement' do
     assert_equal :belongs_to, Reading.reflect_on_association(:announcement).macro
   end
+  test 'invalid without recited_at' do
+    assert build(:reading, recited_at: nil).invalid?
+  end
 end
