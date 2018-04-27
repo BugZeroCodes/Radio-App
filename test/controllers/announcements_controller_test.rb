@@ -26,9 +26,9 @@ class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal assigns(:announcements), Announcement.all
     assert_match '<h2>Announcements</h2>', @response.body
+    assert_no_match 'Edit', @response.body
+    assert_no_match 'Delete', @response.body
     Announcement.all.each do |announcement|
-      assert_no_match 'Edit', @response.body
-      assert_no_match 'Delete', @response.body
       assert_match announcement.text, @response.body
       assert_match announcement.expires_at.strftime('%m-%d-%Y'), @response.body
     end
