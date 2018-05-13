@@ -1,18 +1,23 @@
 <h2>Announcements</h2>
-<table>
+
+<% if can?(:create, Announcement) %>
+  <%= link_to 'New Announcement', new_announcement_path, class: 'btn btn-success' %>
+<% end %>
+<table class='table'>
   <tr>
     <th>Text</th>
     <th>Expires at</th>
   </tr>
-  <tr>
+
   <% @announcements.each do |announcement| %>
-    <td><%= announcement.text %></td>
-    <td><%= announcement.expires_at.strftime('%m-%d-%Y') %></td>
-    <%= link_to 'Show', announcement %>
-    <% if can?(:manage, @announcements) %>
-      <%= link_to 'Edit', edit_announcement_path(id: announcement.id) %>
-      <%= link_to 'Delete', announcement_path(id: announcement.id), method: :delete %>
-    <% end %>
+    <tr>
+      <td><%= announcement.text %></td>
+      <td><%= announcement.expires_at.strftime('%m-%d-%Y') %></td>
+      <td><%= link_to 'Show', announcement %></td>
+      <% if can?(:manage, @announcements) %>
+        <td><%= link_to 'Edit', edit_announcement_path(id: announcement.id) %></td>
+        <td><%= link_to 'Delete', announcement_path(id: announcement.id), method: :delete %></td>
+      <% end %>
+    </tr>
   <% end %>
-  </tr>
 </table>
