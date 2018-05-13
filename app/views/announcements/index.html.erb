@@ -1,7 +1,7 @@
 <h2>Announcements</h2>
 
 <% if can?(:create, Announcement) %>
-  <%= link_to 'New Announcement', new_announcement_path, class: 'btn btn-success' %>
+  <%= link_to 'New Announcement', new_announcement_path, class: 'btn btn-success', id: 'new-announcement' %>
 <% end %>
 <table class='table'>
   <tr>
