@@ -3,44 +3,54 @@ require 'test_helper'
 class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
-  setup do
-    3.times do |n|
-      create(:announcement, text: "Announcement #{n}")
-    end
-  end
-
   teardown do
     User.destroy_all
     Announcement.destroy_all
   end
 
-  test 'redirected if not authenticated' do
+  # authentication tests
+  test 'index redirected if not authenticated' do
     get announcements_path
-    assert_redirected_to new_user_session_path
+
+    assert_response :redirect
   end
 
-  test 'logged in beginner views index' do
-    sign_in create(:beginner)
+  test 'show redirected if not authenticated' do
+    announcement = create(:announcement)
 
-    get announcements_path
-    assert_response :success
-    assert_equal assigns(:announcements), Announcement.all
-    assert_match '<h2>Announcements</h2>', @response.body
-    assert_no_match 'Edit', @response.body
-    assert_no_match 'Delete', @response.body
-    Announcement.all.each do |announcement|
-      assert_match announcement.text, @response.body
-      assert_match announcement.expires_at.strftime('%m-%d-%Y'), @response.body
+    get announcement_path(announcement)
+
+    assert_response :redirect
+  end
+
+  # index action
+  [:beginner, :admin].each do |role|
+    test "logged in #{role} views index" do
+
+      3.times do |n|
+        create(:announcement, text: "Announcement #{n}")
+      end
+
+      sign_in create(role)
+      get announcements_path
+
+      assert_equal assigns(:announcements), Announcement.all
+      assert_response :success
+      assert_template 'announcements/index'
     end
   end
 
-  test 'logged in admin sees edit and delete buttons' do
-    sign_in create(:admin)
+  # show action
+  [:beginner, :admin].each do |role|
+    test "logged in #{role} views show" do
+      announcement = create(:announcement)
 
-    get announcements_path
-    assert_response :success
+      sign_in(create(role))
+      get announcement_path(announcement)
 
-    assert_match 'Edit', @response.body
-    assert_match 'Delete', @response.body
+      assert_equal assigns(:announcement), announcement
+      assert_response :success
+      assert_template 'announcements/show'
+    end
   end
 end
