@@ -7,11 +7,11 @@
   <tr>
   <% @announcements.each do |announcement| %>
     <td><%= announcement.text %></td>
-    <td><%= announcement.expires_at %></td>
+    <td><%= announcement.expires_at.strftime('%m-%d-%Y') %></td>
     <%= link_to 'Show', announcement %>
-    <% if current_user.role == 'admin' %>
+    <% if can?(:manage, @announcements) %>
       <%= link_to 'Edit', edit_announcement_path(id: announcement.id) %>
-      <%= link_to 'Delete', announcement_path, method: :delete, id: announcement.id %>
+      <%= link_to 'Delete', announcement_path(id: announcement.id), method: :delete %>
     <% end %>
   <% end %>
   </tr>
