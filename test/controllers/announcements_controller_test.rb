@@ -110,4 +110,42 @@ class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
   test 'beginner CANNOT create an announcement' do
     skip 'unimplemented'
   end
+
+  # update action
+  # context: admin
+  test 'admin can update an announcement' do
+    announcement = create(:announcement)
+    sign_in(create(:admin))
+
+    patch announcement_path(announcement, announcement: { text: 'Changed it!', expires_at: 2.days.from_now })
+
+    assert_response :success
+    assert_template 'announcements/show'
+    assert_equal 'Changed it!', assigns(:announcement).text
+    assert_equal 2.days.from_now, assigns(:announcement).expires_at
+  end
+  # update action
+  # context: beginner
+  test 'beginner CANNOT update an announcement' do
+    skip 'unimplemented'
+  end
+
+  # delete action
+  # context: admin
+  test 'admin can delete an announcement' do
+    announcement = create(:announcement)
+    sign_in(create(:admin))
+
+    assert_difference('Announcement.count', -1) do
+      delete announcement_path(announcement)
+    end
+
+    assert_redirect
+  end
+
+  # delete action
+  # context: beginner
+  test 'beginner CANNOT delete an announcement' do
+    skip 'unimplemented'
+  end
 end
