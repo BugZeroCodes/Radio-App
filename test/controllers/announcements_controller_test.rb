@@ -23,6 +23,18 @@ class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
+  test 'new redirected if not authenticated' do
+    get new_announcement_path
+
+    assert_response :redirect
+  end
+
+  test 'create redirected if not authenticated' do
+    post announcements_path(attributes_for(:annoincement))
+
+    assert_response :reidrect
+  end
+
   # index action
   [:beginner, :admin].each do |role|
     test "logged in #{role} views index" do
@@ -66,4 +78,32 @@ class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'beginner CANNOT view new'
+
+  test 'admin can view edit' do
+    announcement = create(:announcement)
+    sign_in create(:admin)
+
+    get edit_announcement_path(announcement)
+
+    assert_equal assigns(:announcement), announcement
+    assert_Response :success
+    assert_template 'announcements/edit'
+  end
+
+  # create action
+  # context: admin
+  test 'admin can create an announcement' do
+    sign_in create(:admin)
+
+    assert_difference('Announcement.count', 1) do
+      post announcements_path(attributes_for(:announcement))
+    end
+
+    assert_response :success
+    assert_template 'announcements/show'
+  end
+
+  # create action
+  # context: beginner
+  test 'beginner CANNOT create an announcement'
 end
