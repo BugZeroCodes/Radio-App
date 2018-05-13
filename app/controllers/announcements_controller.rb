@@ -15,6 +15,21 @@ class AnnouncementsController < ApplicationController
 
   def create
     @announcement = Announcement.new(announcement_params)
+    if @announcement.save
+      render :show, status: :created
+    else
+    end
+  end
+
+  def edit
+    @announcement = Announcement.find(params[:id])
+  end
+
+  def update
+    if @announcement.update(announcement_params)
+      render :show, status: :ok
+    else
+    end
   end
 
   private

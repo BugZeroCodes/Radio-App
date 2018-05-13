@@ -1,0 +1,27 @@
+<%= form_with(model: announcement, local: true) do |f| %>
+  <% if announcement.errors.any? %>
+    <div id="error-explanation">
+      <h2><%= pluralize(announcement.errors.count, "error" )%> forbade this announcement from being saved:</h2>
+
+      <ul>
+        <% announcement.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :text %>
+    <%= f.text_field :text, id: :announcement_text %>
+  </div>
+
+  <div class="field">
+    <%= f.label :expires_at %>
+    <%= f.date_field :expires_at, id: :announcement_expires_at %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Confirm" %>
+  </div>
+<% end %>
