@@ -53,4 +53,17 @@ class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
       assert_template 'announcements/show'
     end
   end
+
+  # new action
+  test 'admin can view new' do
+    sign_in create(:admin)
+
+    get new_announcement_path
+
+    refute assigns(:announcement).persisted?
+    assert_response :success
+    assert_template 'announcements/new'
+  end
+
+  test 'beginner CANNOT view new'
 end
