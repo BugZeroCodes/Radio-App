@@ -1,4 +1,5 @@
 class AnnouncementsController < ApplicationController
+  load_and_authorize_resource
 
   before_action :authenticate_user!
   def index
@@ -18,6 +19,7 @@ class AnnouncementsController < ApplicationController
     if @announcement.save
       render :show, status: :created
     else
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -26,10 +28,17 @@ class AnnouncementsController < ApplicationController
   end
 
   def update
+    @announcement = Announcement.find(params[:id])
     if @announcement.update(announcement_params)
       render :show, status: :ok
     else
+      render :update, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @announcement.destroy
+    redirect_to announcements_path
   end
 
   private

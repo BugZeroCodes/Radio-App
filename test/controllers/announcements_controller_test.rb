@@ -30,7 +30,7 @@ class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'create redirected if not authenticated' do
-    post announcements_path(attributes_for(:announcement))
+    post announcements_path(announcement: attributes_for(:announcement))
 
     assert_response :redirect
   end
@@ -122,7 +122,7 @@ class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_template 'announcements/show'
     assert_equal 'Changed it!', assigns(:announcement).text
-    assert_equal 2.days.from_now, assigns(:announcement).expires_at
+    assert_equal 2.days.from_now.to_date, assigns(:announcement).expires_at.to_date
   end
   # update action
   # context: beginner
@@ -140,7 +140,7 @@ class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
       delete announcement_path(announcement)
     end
 
-    assert_redirect
+    assert_response :redirect
   end
 
   # delete action
