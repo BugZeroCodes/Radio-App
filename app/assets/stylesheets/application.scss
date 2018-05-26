@@ -12,9 +12,7 @@
  *
  */
 @import "bootstrap";
-ul {
-  list-style-type: none;
-}
-li {
-  display: inline;
+
+.navbar {
+  max-height: 56px;
 }
