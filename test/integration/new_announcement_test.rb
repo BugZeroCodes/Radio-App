@@ -21,8 +21,7 @@ class NewAnnouncementTest < ActionDispatch::IntegrationTest
     sign_in(create(:beginner))
 
     get announcements_path
-    # refute_select('#new-announcement', 'New Announcement')
-    skip 'work out refute'
+    assert_select('#new-announcement', false)
   end
 
 end

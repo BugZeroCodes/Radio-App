@@ -78,7 +78,11 @@ class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'beginner CANNOT view new' do
-    skip 'unimplemented'
+    sign_in create(:beginner)
+
+    get new_announcement_path
+
+    assert_response :redirect
   end
 
   test 'admin can view edit' do
@@ -108,7 +112,13 @@ class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
   # create action
   # context: beginner
   test 'beginner CANNOT create an announcement' do
-    skip 'unimplemented'
+    sign_in create(:beginner)
+
+    assert_no_difference('Announcement.count') do
+      post announcements_path(announcement: attributes_for(:announcement))
+    end
+
+    assert_response :redirect
   end
 
   # update action
@@ -127,7 +137,12 @@ class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
   # update action
   # context: beginner
   test 'beginner CANNOT update an announcement' do
-    skip 'unimplemented'
+    announcement = create(:announcement)
+    sign_in(create(:beginner))
+
+    patch announcement_path(announcement, announcement: { text: 'Changed it!', expires_at: 2.days.from_now })
+
+    assert_response :redirect
   end
 
   # delete action
@@ -146,6 +161,12 @@ class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
   # delete action
   # context: beginner
   test 'beginner CANNOT delete an announcement' do
-    skip 'unimplemented'
+    announcement = create(:announcement)
+    sign_in(create(:beginner))
+
+    assert_no_difference('Announcement.count') do
+      delete announcement_path(announcement)
+    end
+    assert_response :redirect
   end
 end
