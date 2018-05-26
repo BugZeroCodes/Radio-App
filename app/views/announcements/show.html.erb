@@ -4,8 +4,8 @@
 </p>
 
 <p>
-    <strong>Expires at:</strong>
-    <%= @announcement.expires_at.strftime('%m-%d-%y') %>
+  <strong>Expires at:</strong>
+  <%= @announcement.expires_at.strftime('%m-%d-%y') %>
 </p>
 
 <%= link_to 'Edit', edit_announcement_path(id: @announcement.id) %>|
