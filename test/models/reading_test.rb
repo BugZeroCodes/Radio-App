@@ -13,4 +13,10 @@ class ReadingTest < ActiveSupport::TestCase
   test 'invalid without recited_at' do
     assert build(:reading, recited_at: nil).invalid?
   end
+  test 'invalid without user_id' do
+    assert build(:reading, user_id: nil).invalid?
+  end
+  test 'invalid without announcement_id' do
+    assert build(:reading, announcement_id: nil).invalid?
+  end
 end
