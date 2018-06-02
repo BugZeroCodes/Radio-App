@@ -10,10 +10,13 @@ class ReadingsController < ApplicationController
 
   def new
     @reading = Reading.new
+    @announcement = Announcement.find(params[:id])
   end
 
   def create
     @reading = current_user.readings.new(reading_params)
+    @announcement = Announcement.find(params[:id])
+    @reading.announcement = @announcement
     if @reading.save
       render :show, status: :created
     else

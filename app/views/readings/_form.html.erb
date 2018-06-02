@@ -1,4 +1,4 @@
-<%= form_with(model: reading, local: true) do |f| %>
+<%= form_with(model: reading, local: true, url: readings_announcement_path(announcement)) do |f| %>
   <% if reading.errors.any? %>
     <div id="error-explanation">
       <h2><%= pluralize(reading.errors.count, "error" )%> forbade this reading from being saved:</h2>
@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :recited_at %>
-    <%= f.date_field :recited_at, id: :reading_recited_at %>
+    <%= f.datetime_field :recited_at, id: :reading_recited_at %>
   </div>
 
   <div class="form-group">
