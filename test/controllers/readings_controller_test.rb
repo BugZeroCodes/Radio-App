@@ -13,6 +13,7 @@ class ReadingsControllerTest < ActionDispatch::IntegrationTest
 
   # Authenticated 1/4
   test "authenticated user in index" do
+    create(:reading)
     sign_in(create(:beginner))
     get readings_url
     assert_response :success
