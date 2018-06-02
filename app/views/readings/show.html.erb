@@ -1,2 +1,6 @@
-<h1>Readings#show</h1>
-<p>Find me in app/views/readings/show.html.erb</p>
+<h1>Reading for Announcement #<%= link_to @reading.announcement_id, announcement_path(@reading.announcement_id) %></h1>
+<p>When Was It Recited?</p>
+<p><%= @reading.recited_at.strftime('%m-%d-%Y %H:%M:%S') %></p>
+<br />
+<p>Who Read/Made This Reading?</p>
+<p><%= @reading.user.dj_name %></p>
