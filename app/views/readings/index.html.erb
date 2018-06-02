@@ -8,9 +8,9 @@
   <% @readings.each do |reading| %>
     <tr>
       <td><%= reading.recited_at.strftime('%m-%d-%Y') %></td>
-      <td><%= link_to 'Show', announcement %></td>
-      <td><%= link_to 'Edit', edit_announcement_path(id: announcement.id) %></td>
-      <td><%= link_to 'Delete', announcement_path(id: announcement.id), method: :delete %></td>
+      <td><%= link_to 'Show', reading %></td>
+      <td><%= link_to 'Edit', edit_reading_path(id: reading.id) %></td>
+      <td><%= link_to 'Delete', reading_path(id: reading.id), method: :delete %></td>
     </tr>
   <% end %>
 </table>
