@@ -39,15 +39,17 @@ class ReadingsControllerTest < ActionDispatch::IntegrationTest
   # New actions
   # Unauthenticated 3/4
   test "unauthenticated user redirected from new" do
-    get new_reading_url
+    announcement = create(:announcement)
+    get new_reading_announcement_url(id: announcement.id)
     assert_response :redirect
     assert response.redirect_url.match?(new_user_session_path)
   end
 
   # Authenticated 3/4
   test "authenticated user in new" do
+    announcement = create(:announcement)
     sign_in(create(:beginner))
-    get new_reading_url
+    get new_reading_announcement_url(id: announcement.id)
     assert_response :success
   end
 
