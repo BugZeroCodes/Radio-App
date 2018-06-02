@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'readings/index'
+
+  get 'readings/show'
+
+  get 'readings/new'
+
+  get 'readings/edit'
+
   devise_for :users
   resources :announcements
   get 'home/index'
