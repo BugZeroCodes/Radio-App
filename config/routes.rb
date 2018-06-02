@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
-  get 'readings/index'
-
-  get 'readings/show'
-
-  get 'readings/new'
-
-  get 'readings/edit'
+  resources :readings
 
   devise_for :users
   resources :announcements
