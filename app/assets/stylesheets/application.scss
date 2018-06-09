@@ -21,7 +21,11 @@
   height: 40%;
 }
 body {
-  background-color: blue;
+  background: linear-gradient(to top, red, yellow, green) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   font-family: Futura, Georgia, sans-serif;
 }
 #welcomer {

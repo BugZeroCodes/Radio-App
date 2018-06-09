@@ -3,6 +3,7 @@
 <% if can?(:create, Announcement) %>
   <%= link_to 'New Announcement', new_announcement_path, class: 'btn btn-success', id: 'new-announcement' %>
 <% end %>
+<%= link_to 'Hide/Show Expired Announcements', '#', class: 'btn btn-danger float-right' %>
 <table class='table'>
   <tr>
     <th>Text</th>
