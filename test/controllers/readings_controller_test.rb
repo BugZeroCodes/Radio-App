@@ -72,4 +72,15 @@ class ReadingsControllerTest < ActionDispatch::IntegrationTest
     get edit_reading_url(id: reading.id)
     assert_response :success
   end
+
+  # New section to delete readings
+  test 'make sure we can delete readings' do
+    user = create(:beginner)
+    reading = create(:reading, user: user)
+    sign_in(user)
+
+    assert_difference('Reading.count', -1) do
+      delete reading_path(reading)
+    end
+  end
 end

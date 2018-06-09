@@ -38,6 +38,7 @@ class ReadingsController < ApplicationController
   end
 
   def destroy
+    @reading = Reading.find(params[:id])
     @reading.destroy
     redirect_to readings_path
   end
