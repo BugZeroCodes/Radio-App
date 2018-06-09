@@ -4,4 +4,4 @@
 <br />
 <p>Who Read/Made This Reading?</p>
 <p><%= @reading.user.dj_name %></p>
-<%= link_to 'Back', :back %>
+<%= link_to 'Delete', reading_path(id: @reading.id), method: :delete, data: { confirm: "Are you sure?\n This cannot be undone." } %> | <%= link_to 'Back', :back %>

@@ -10,7 +10,7 @@
       <td><%= reading.recited_at.strftime('%m-%d-%Y') %></td>
       <td><%= link_to 'Show', reading %></td>
       <td><%= link_to 'Edit', edit_reading_path(id: reading.id) %></td>
-      <td><%= link_to 'Delete', reading_path(id: reading.id), method: :delete %></td>
+      <td><%= link_to 'Delete', reading_path(id: reading.id), method: :delete, data: { confirm: "Are you sure?\n This cannot be undone." } %></td>
     </tr>
   <% end %>
 </table>

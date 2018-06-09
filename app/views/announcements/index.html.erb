@@ -17,7 +17,7 @@
       <td><%= link_to 'Show', announcement %></td>
       <% if can?(:manage, @announcements) %>
         <td><%= link_to 'Edit', edit_announcement_path(id: announcement.id) %></td>
-        <td><%= link_to 'Delete', announcement_path(id: announcement.id), method: :delete %></td>
+        <td><%= link_to 'Delete', announcement_path(id: announcement.id), method: :delete, data: { confirm: "Are you sure?\n This will delete all of the readings to this announcement!" } %></td>
       <% end %>
       <td><%= link_to 'Log Reading', new_reading_announcement_path(announcement), class: 'btn btn-success' %></td>
     </tr>
