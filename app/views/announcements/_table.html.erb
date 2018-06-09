@@ -1,0 +1,20 @@
+<table class='table'>
+  <tr>
+    <th>Text</th>
+    <th>Expires at</th>
+    <th colspan="4">Configuration</th>
+  </tr>
+
+  <% @announcements.each do |announcement| %>
+    <tr>
+      <td><%= announcement.text %></td>
+      <td><%= announcement.expires_at.strftime('%m-%d-%Y') %></td>
+      <td><%= link_to 'Show', announcement %></td>
+      <% if can?(:manage, @announcements) %>
+        <td><%= link_to 'Edit', edit_announcement_path(id: announcement.id) %></td>
+        <td><%= link_to 'Delete', announcement_path(id: announcement.id), method: :delete, data: { confirm: "Are you sure?\n This will delete all of the readings to this announcement!" } %></td>
+      <% end %>
+      <td><%= link_to 'Log Reading', new_reading_announcement_path(announcement), class: 'btn btn-success' %></td>
+    </tr>
+  <% end %>
+</table>

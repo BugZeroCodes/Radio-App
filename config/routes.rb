@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :readings, except: [:new, :create]
 
   devise_for :users
+  get 'hide_expired', controller: 'announcements', as: 'hide_expired'
+
   resources :announcements do
     member do
       get 'readings/new', as: 'new_reading'
