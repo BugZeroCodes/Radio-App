@@ -1,0 +1,22 @@
+<%= form_with(model: reading, local: true, url: readings_announcement_path(announcement)) do |f| %>
+  <% if reading.errors.any? %>
+    <div id="error-explanation">
+      <h2><%= pluralize(reading.errors.count, "error" )%> forbade this reading from being saved:</h2>
+
+      <ul>
+        <% reading.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :recited_at %>
+    <%= f.datetime_field :recited_at, id: :reading_recited_at %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Confirm" %>
+  </div>
+<% end %>

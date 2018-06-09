@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
-  get 'readings/index'
-
-  get 'readings/show'
-
-  get 'readings/new'
-
-  get 'readings/edit'
+  resources :readings, except: [:new, :create]
 
   devise_for :users
-  resources :announcements
+  resources :announcements do
+    member do
+      get 'readings/new', as: 'new_reading'
+      post 'readings' => 'readings#create'
+    end
+  end
   get 'home/index'
   root 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
